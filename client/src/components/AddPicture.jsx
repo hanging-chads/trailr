@@ -14,12 +14,13 @@ import { uploadPhoto } from '../helpers';
 
 const GoogleMapWrapper = styled.div`
   height: 300px;
-  width: 100%;
+  width: 100%
 `;
 
 // The intention is to implement these at some point to keep people from overloading us
-const maxImages = 10;
-const maxImageSize = 5 * 1024 * 1024; // 5MBs
+
+// const maxImages = 10;
+// const maxImageSize = 5 * 1024 * 1024; // 5MBs
 
 /**
  * File picker that pulls metadata off photos or lets users manually select a lat&lng
@@ -28,14 +29,16 @@ const maxImageSize = 5 * 1024 * 1024; // 5MBs
  * @param {Function} appendPhoto function that adds photos to the trail
  * @param {Object} center contains a lat and lng to center the maps on if no gps data
  */
-const addPicture = ({ appendPhoto, center, userId, trailId }) => {
+const addPicture = ({
+  appendPhoto, center, userId, trailId,
+}) => {
   const [show, setShow] = useState(false);
   const [images, setImages] = useState({});
   const toggleModal = () => setShow(!show);
 
   /**
    * Handles whenever a user adds files from their computer. It parses
-   *  the gps data off the phot. Then uploads it to the browser, but if
+   *  the gps data off the photo. Then uploads it to the browser, but if
    *  it is a heic file it has to first convert it. Finally it adds them
    *  to the images state.
    * @param {Event} e event that we persist and pull the files off
@@ -44,6 +47,7 @@ const addPicture = ({ appendPhoto, center, userId, trailId }) => {
     e.persist();
     if (e.target.files) {
       for (let i = 0; i < e.target.files.length; i += 1) {
+        console.log('i in add pic', i)
         // Parse the metadata off the image,
         // latitude and longitude
         exifr.parse(e.target.files[i])
@@ -77,11 +81,11 @@ const addPicture = ({ appendPhoto, center, userId, trailId }) => {
                   });
                 })
                 .catch((err) => {
-                  console.log(err);
+                  console.error(err);
                 });
             } else {
               setImages((prev) => {
-                const updated = { ...prev};
+                const updated = { ...prev };
                 updated[newImage.key] = newImage;
                 return updated;
               });
@@ -129,7 +133,7 @@ const addPicture = ({ appendPhoto, center, userId, trailId }) => {
     const filesArray = Object.keys(images).map((key) => images[key]);
     Promise.all(filesArray.map((file) => imagePromiseUploader(file)))
       .then((response) => {
-        const newImages = response.map(i => i.img);
+        const newImages = response.map((i) => i.img);
         appendPhoto(newImages);
         setImages({});
       })
@@ -160,7 +164,7 @@ const addPicture = ({ appendPhoto, center, userId, trailId }) => {
                     defaultZoom={17}
                     onClick={(e) => addMarker(e, images[key].key)}
                   >
-                    <Marker lat={images[key].lat} lng={images[key].lng} clickHandler={()=>{}} />
+                    <Marker lat={images[key].lat} lng={images[key].lng} clickHandler={() => {}} />
                   </GoogleMapReact>
                 </GoogleMapWrapper>
               </Col>
