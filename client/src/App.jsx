@@ -36,19 +36,24 @@ const app = () => {
   return (
     <BrowserRouter>
       <HeaderImage />
-      <div className="container">
+      <div className='container'>
         <Header user={user} />
-        <div className="row">
+        <div className='row'>
           <Switch>
-            <Route path="/trail/:id">
+            <Route path='/trail/:id'>
               <Trail user={user} />
             </Route>
-            <Route path="/user/:id">
+            <Route path='/user/:id'>
               <User user={user} />
             </Route>
-            <Route path="/404"><NoMatchPage /></Route>
-            <Route path="/">
-              <div className="col-12" style={{ width: '100%', height: '600px' }}>
+            <Route path='/404'>
+              <NoMatchPage />
+            </Route>
+            <Route path='/'>
+              <div
+                className='col-12'
+                style={{ width: '100%', height: '600px' }}
+              >
                 <MapWrapped
                   googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.GOOGLE_MAPS_API_KEY}`}
                   containerElement={<div style={{ height: '800px' }} />}
