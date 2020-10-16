@@ -20,7 +20,7 @@ import * as trailData from '../data/trail-data.json';
  * @param {Function} changeCurrentPhoto a function that changes the current photo
  */
 
-const MapWithASearchBox = React.memo(() => {
+const MapWithASearchBox = React.memo(({ getLocation }) => {
   const [mapApiLoaded, setMapApiLoaded] = useState(false);
   const [mapInstance, setMapInstance] = useState(null);
   const [mapApi, setMapApi] = useState(null);
@@ -34,7 +34,7 @@ const MapWithASearchBox = React.memo(() => {
 
   const getInput = (data) => {
     console.log(data)
-  }
+  };
 
   const addPlace = (place) => {
     setPlaces(place);
@@ -104,8 +104,8 @@ const MapWithASearchBox = React.memo(() => {
       map.addListener('bounds_changed', () => {
         const currentBounds = map.getBounds();
         const currentCenter = {
-          lat: (currentBounds.Za.i + currentBounds.Za.j) / 2,
-          lng: (currentBounds.Va.i + currentBounds.Va.j) / 2,
+          lat: (currentBounds.Sa.i + currentBounds.Sa.j) / 2,
+          lng: (currentBounds.Ya.i + currentBounds.Ya.j) / 2,
         };
         const range = 1.2; // lat/lon degrees needed to change in order to search again
         const radius = 100; // search radius in miles
@@ -135,7 +135,6 @@ const MapWithASearchBox = React.memo(() => {
           position: location,
           icon: transparentMarker,
         }));
-        // eslint-disable-next-line no-new
         new MarkerClusterer(map, markers, {
           imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
           gridSize: 15,
@@ -147,6 +146,8 @@ const MapWithASearchBox = React.memo(() => {
 
   useEffect(() => {
     setGoogleMapRef(mapInstance, mapApi);
+    // used to pass the location to app component 
+    getLocation(userLocation);
   }, [places]);
 
   return (
@@ -157,7 +158,6 @@ const MapWithASearchBox = React.memo(() => {
           mapApi={mapApi}
           places={places}
           addplace={addPlace}
-          // eslint-disable-next-line no-undef
           getInput={getInput}
         />
       )}

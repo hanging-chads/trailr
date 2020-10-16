@@ -47,7 +47,6 @@ const addPicture = ({
     e.persist();
     if (e.target.files) {
       for (let i = 0; i < e.target.files.length; i += 1) {
-        console.log('i in add pic', i)
         // Parse the metadata off the image,
         // latitude and longitude
         exifr.parse(e.target.files[i])

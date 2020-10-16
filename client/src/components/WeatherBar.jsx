@@ -26,7 +26,7 @@ const {lat, lng} = userLocation;
         console.log(data)
         isSwitchOn ? setView(data.daily.slice(1, 6)) : setView(data.hourly.slice(0, 7))
         setViewLoaded(true);
-      }).catch((err) => console.log('There seems to be an error', err))
+      }).catch((err) => console.error('There seems to be an error', err))
     }
   useEffect(() => {
     updateWeather()
@@ -36,7 +36,7 @@ const {lat, lng} = userLocation;
     <Container>
     <Row style={{boarder: '1px solid black'}}>
       <Col xs='1'> 
-      <div>Wandelust</div>
+      <div>Wanderlust</div>
       </Col>
       <Col xs='1'>
         <Form>
@@ -45,7 +45,7 @@ const {lat, lng} = userLocation;
             type="switch"
             id="custom-switch"
             checked={isSwitchOn}
-            label="Galivanter"
+            label="Gallivanter"
           />
         </Form>
       </Col>

@@ -18,6 +18,9 @@ const header = ({ user }) => (
             <Link to={`/user/${user.id}`} className="nav-item nav-link">
               My Profile
             </Link>
+            <Link to="/stargazer" className="nav-item nav-link">
+              Stargazer
+            </Link>
             <Nav.Link href="/auth/logout">Signout</Nav.Link>
           </>
         ) : (

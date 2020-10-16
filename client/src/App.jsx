@@ -7,6 +7,7 @@ import Trail from './components/Trail.jsx';
 import User from './components/User.jsx';
 import NoMatchPage from './components/NoMatchPage.jsx';
 import HeaderImage from './components/HeaderImage.jsx';
+import Stargazer from './components/Stargazer.jsx';
 // import Signup from './components/Signup.jsx';
 // import Login from './components/Login.jsx';
 
@@ -16,6 +17,8 @@ const loggedOut = { loggedIn: false };
 // The app
 const app = () => {
   const [user, setUser] = useState(loggedOut);
+  const [location, setLocation] = useState({});
+  const [bg, setbg] = useState(true);
   // Get's the auth state and saves it to the user object
   useEffect(() => {
     getAuth()
@@ -33,6 +36,12 @@ const app = () => {
         setUser(loggedOut);
       });
   }, []);
+  
+  const getLocation = (userLocation)  => {
+    setLocation(userLocation);
+    console.log('user location in app', location);
+  };
+
   return (
     <BrowserRouter>
       <HeaderImage />
@@ -45,6 +54,12 @@ const app = () => {
             </Route>
             <Route path='/user/:id'>
               <User user={user} />
+            </Route>
+            <Route path='/stargazer'>
+              <Stargazer 
+                user={user} 
+                location={location}
+              />
             </Route>
             <Route path='/404'>
               <NoMatchPage />
@@ -59,6 +74,7 @@ const app = () => {
                   containerElement={<div style={{ height: '800px' }} />}
                   mapElement={<div style={{ height: '100%' }} />}
                   loadingElement={<div style={{ height: '100%' }} />}
+                  getLocation={getLocation}
                 />
               </div>
             </Route>

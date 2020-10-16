@@ -18,7 +18,7 @@ const WeatherTicker = ({time, temp, description, icon, day, eve}) =>
   <CardGroup>
   <Card style={{backgroundColor: '#D6EAF8'}}>
     <Card.Body>
-    <Card.Text style={{color: '#85929E'}}>{
+    <Card.Text style={{color: '#85929E', textAlign: 'center'}}>{
     hourConverter(time)
     }
     </Card.Text>
@@ -31,7 +31,7 @@ const WeatherTicker = ({time, temp, description, icon, day, eve}) =>
 <CardGroup>
 <Card style={{backgroundColor: '#D6EAF8'}}>
   <Card.Body>
-  <Card.Text style={{color: '#85929E'}}>{
+  <Card.Text style={{color: '#85929E', textAlign: 'center'}}>{
   dayConverter(time)
   }</Card.Text>
     <Card.Img variant="top" src={`http://openweathermap.org/img/wn/${icon}@2x.png`} />

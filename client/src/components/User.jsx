@@ -36,7 +36,10 @@ const userPage = ({ user }) => {
               } else {
                 setPhotoInfo(userData.photos);
                 setMyTrails(userData.favorites);
-                setUserInfo({ name: userData.name, url: userData.profile_photo_url });
+                setUserInfo({
+                  name: userData.name,
+                  url: userData.profile_photo_url,
+                });
               }
             })
             .catch((err) => {
@@ -85,63 +88,64 @@ const userPage = ({ user }) => {
     <>
       {redirect ? <Redirect to="/404" /> : null}
       <Col xs={6}>
-        {!photoInfo.length
-          ? null
-          : (
-            <>
-              <Carousel
-                photos={photoInfo}
-                currentPhoto={currentPhoto}
-                changeCurrentPhoto={changeCurrentPhoto}
-                user={user}
-                removePhoto={removePhoto}
+        {!photoInfo.length ? null : (
+          <>
+            <Carousel
+              photos={photoInfo}
+              currentPhoto={currentPhoto}
+              changeCurrentPhoto={changeCurrentPhoto}
+              user={user}
+              removePhoto={removePhoto}
+            />
+            {user.loggedIn ? (
+              <AddComment
+                appendComments={appendComments}
+                userId={user.id}
+                photoId={photoInfo[currentPhoto].id}
+                name={user.name}
               />
-              {user.loggedIn
-                ? (
-                  <AddComment
-                    appendComments={appendComments}
-                    userId={user.id}
-                    photoId={photoInfo[currentPhoto].id}
-                    name={user.name}
-                  />
-                )
-                : null}
-            </>
-          )}
+            ) : null}
+          </>
+        )}
       </Col>
       <Col xs={6}>
         <Image thumbnail src={userInfo.url} />
+        <br></br>
+        <iframe
+          src='https://open.spotify.com/embed?uri=spotify:album:05c49JgPmL4Uz2ZeqRx5SP'
+          width='300'
+          height='380'
+          frameborder='0'
+          allowtransparency='true'
+          allow='encrypted-media'
+        ></iframe>
         <h2>{userInfo.name} Saved Trails</h2>
         {!myTrails.length
           ? null
           : myTrails.map((trail) => (
-            <Accordion key={trail.id}>
-              <Card>
-                <Accordion.Toggle as={Card.Header} eventKey="0">
-                  <Row>
-                    <Col xs={9}>
-                      {trail.name}
-                    </Col>
-                    <Col xs={3}>
-                      <Link to={`/trail/${trail.id}`}>See Trail</Link>
-                    </Col>
-                  </Row>
-                </Accordion.Toggle>
-                <Accordion.Collapse eventKey="0">
-                  <Card.Body>
+              <Accordion key={trail.id}>
+                <Card>
+                  <Accordion.Toggle as={Card.Header} eventKey='0'>
                     <Row>
-                      <Col xs={4}>
-                        <Image thumbnail src={trail.thumbnail} />
-                      </Col>
-                      <Col xs={8}>
-                        {trail.description}
+                      <Col xs={9}>{trail.name}</Col>
+                      <Col xs={3}>
+                        <Link to={`/trail/${trail.id}`}>See Trail</Link>
                       </Col>
                     </Row>
-                  </Card.Body>
-                </Accordion.Collapse>
-              </Card>
-            </Accordion>
-          ))}
+                  </Accordion.Toggle>
+                  <Accordion.Collapse eventKey='0'>
+                    <Card.Body>
+                      <Row>
+                        <Col xs={4}>
+                          <Image thumbnail src={trail.thumbnail} />
+                        </Col>
+                        <Col xs={8}>{trail.description}</Col>
+                      </Row>
+                    </Card.Body>
+                  </Accordion.Collapse>
+                </Card>
+              </Accordion>
+            ))}
       </Col>
     </>
   );
