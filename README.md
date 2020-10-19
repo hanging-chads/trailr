@@ -27,6 +27,7 @@ Google Cloud Storage
 Multer
 Google Map React
 Google Marker Clusterer
+Digital Ocean
 ```javascript
   "dependencies": {
     "@brainhubeu/react-carousel": "^1.19.26",
