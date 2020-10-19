@@ -4,7 +4,9 @@
 Giving users a social-media-style community to share their experiences while engaging in an outdoor (and socially distant) activity
 
 # Description
-Welcome to Trailr. Trailr provides users access to hiking trails in their area, as well as search-by-location functionality. Trails load automatically as a user traverses to new areas within Google Maps. Users can save their favorite trails to plan trips, and rate the difficulty and likeability of each trail that they encounter. Users can also upload geo-tagged photos, sharing interesting things they find along the trail route with other users. Users can comment on their own photos and photos that others upload, and they can edit their own comments.
+Welcome to Trailr. Trailr provides users access to hiking trails in their area, as well as search-by-location functionality. Trails load automatically as a user traverses to new areas within Google Maps. Users can save their favorite trails to plan trips, and rate the difficulty and likeability of each trail that they encounter. Users can also upload geo-tagged photos, sharing interesting things they find along the trail route with other users. Users can comment on their own photos and photos that others upload, and they can edit their own comments. 
+
+Users can listen to a pre-loaded Spotify playlist and write in a travellog. Users can view an hourly and 5-day weather forecast. Users can view a star map of their current location's sky.
 
 
 # Dependencies
@@ -18,13 +20,15 @@ Axios
 Cookie Parser
 Eslint
 Bootstrap
+Reactstrap
+Moment
 Passport
 Google Cloud Storage
 Multer
 Google Map React
 Google Marker Clusterer
 ```javascript
-"dependencies": {
+  "dependencies": {
     "@brainhubeu/react-carousel": "^1.19.26",
     "@google-cloud/storage": "^5.2.0",
     "@google/markerclusterer": "^2.0.8",
@@ -34,6 +38,7 @@ Google Marker Clusterer
     "body-parser": "^1.19.0",
     "bootstrap": "^4.5.2",
     "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "exifr": "^5.0.3",
@@ -45,6 +50,8 @@ Google Marker Clusterer
     "jquery": "^3.5.1",
     "lodash.isempty": "^4.4.0",
     "mime": "^2.4.6",
+    "mocha": "^8.1.3",
+    "moment": "^2.29.1",
     "multer": "^1.4.2",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.4",
@@ -55,6 +62,7 @@ Google Marker Clusterer
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-bootstrap": "^1.3.0",
+    "react-bootstrap-icons": "^1.0.3-alpha5",
     "react-dom": "^16.13.1",
     "react-google-maps": "^9.4.5",
     "react-hot-loader": "^4.12.21",
@@ -63,16 +71,20 @@ Google Marker Clusterer
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.1",
     "react-static": "^7.4.2",
+    "reactstrap": "^8.6.0",
+    "request": "^2.88.2",
     "styled-components": "^5.1.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
-    "eslint": "^7.6.0",
+    "eslint": "^7.8.1",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-react": "^7.20.5",
+    "eslint-plugin-require": "0.0.1",
+    "husky": "^4.3.0",
     "parcel-bundler": "^1.12.4"
-  }
+  },
 ```
 
 # Installation
@@ -118,6 +130,7 @@ Place in app.yaml file in outermost directory when you’re ready to deploy to t
 ```
 runtime: nodejs12
 env_variables:
+  UNSPLASH_CLIENT_ID            // Unsplashed Client ID
   TRAIL_API_KEY:                // Trail RapidAPI Key
   GOOGLE_MAPS_API_KEY:          // Google Places API Key
   GOOGLE_CLIENT_ID:             // Google OAuth2 Credentials
@@ -154,6 +167,8 @@ Commit messages should be written in present tense describing what the committed
 
 # References
 [Trail RapidAPI Key](https://rapidapi.com/trailapi/api/trailapi)
+[Weather API Key](https://openweathermap.org/api)
+[Unsplashed API Key](https://unsplash.com/developers)
 
 # License
 ISC License (ISC)
@@ -169,3 +184,6 @@ THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH RE
 * dtroyano86@gmail.com
 * peterklingelhofer@gmail.com
 * jamesfeltonthomas@gmail.com
+* scott.anderson1130@gmail.com
+* tenhold@gmail.com
+* kllanosospark@gmail.com
